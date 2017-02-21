@@ -17,9 +17,6 @@ class Client(object):
     Downloads www.udl.cat main page to parse
     for agenda items"""
 
-    def __init__(self):
-        super(Client, self).__init__()
-
     def get_web(self, url):
         """
         Retrieves an HTML URL returns, HTML
@@ -31,10 +28,10 @@ class Client(object):
 
     def search_test(self, html):
         """
-        Parses an html page searching for the agenda
+        Parses an html page
         """
         soup = BeautifulSoup(html,'html.parser')
-        elements = soup.find_all("div", "featured-")
+        elements = soup.find_all("div","featured")
         resultats = []
         for element in elements:
             data = element.find("time")["datatime"].text
@@ -49,7 +46,7 @@ class Client(object):
         """
         html = self.get_web("http://www.udl.cat/")
         resultat = self.search_test(html)
-        #print resultat
+        print resultat
 
 
 if __name__ == "__main__":
